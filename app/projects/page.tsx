@@ -15,7 +15,7 @@ export default async function Projects() {
     })
   );
 
-  const description = 'My open-source side projects and stuff that I built with my colleagues at work';
+  const description = 'My projects and stuff that I built on this blog.';
 
   const workProjects = projectsData.filter(({ type }) => type === 'work');
   const sideProjects = projectsData.filter(({ type }) => type === 'self');

@@ -29,14 +29,14 @@ const TypedBios = () => {
           I live in <b className="font-medium">Jakarta, Indonesia</b>.
         </li>
         <li>
-          My first programming language I learned was <b className="font-medium">Java</b>.
+          My first programming language is <b className="font-medium">Java</b>.
         </li>
         <li>I love web development.</li>
         <li>
           I work mostly with <b className="font-medium">Java/Javascript/Typescript</b> technologies.
         </li>
         <li>
-          I love listening <Twemoji emoji="musical-keyboard" />.
+          I love playing <Twemoji emoji="musical-keyboard" />.
         </li>
         <li>
           I love playing RPG video games <Twemoji emoji="video-game" />
