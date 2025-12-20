@@ -13,10 +13,6 @@
 <p align="center"><i>Loved the project? Please visit our <a href="https://karhdo-blog.vercel.app">Website</a></i></p>
 <br>
 
-## Website
-
-<a href="https://karhdo-blog.vercel.app"><img src="https://raw.githubusercontent.com/Karhdo/karhdo.dev/main/public/static/images/projects/karhdo-blog.png" alt="Image Karhdo's Blog Website" /></a>
-
 ## Tech Stack
 
 This blog is hosted on [Vercel](https://vercel.com/), built with [Next.js](https://nextjs.org/) and [Tailwind CSS](https://tailwindcss.com/) using **Tailwind Nextjs Starter Blog**.
