@@ -1,0 +1,123 @@
+---
+title: 'Testing SMTP Configuration with Python'
+date: '2025-12-20'
+lastmod: '2025-12-20'
+tags: ['python', 'smtp', 'email', 'automation', 'testing']
+summary: > 
+    Learn how to quickly test your SMTP configuration using a simple 
+    Python script to ensure your email credentials are correct.
+---
+
+## Introduction
+
+Have you ever found yourself in a situation where you need to configure SMTP for an application, but you're not quite sure if the credentials you have are correct? Or maybe you're debugging an issue where emails aren't being sent, and you want to rule out credential issues.
+
+I recently faced a case where I was asked to test an SMTP configuration. I was a bit confused about how to verify it quickly without setting up a full-blown application. To solve this, I created a simple Python script to test the SMTP connection and send a test email. This ensures that the SMTP credentials are valid before integrating them into a larger system.
+
+In this post, I'll share that script with you. You can also view the full source code here: [https://github.com/billy93/Test-Email](https://github.com/billy93/Test-Email).
+
+## Prerequisites
+
+To use this script, you'll need Python installed. We'll also use the `python-dotenv` library to manage environment variables securely.
+
+First, install the required package:
+
+```bash
+pip install python-dotenv
+```
+
+## The Python Script
+
+Here is the `main.py` script. It loads the SMTP configuration from environment variables and attempts to send a simple email.
+
+```python:main.py showLineNumbers
+import os
+import smtplib
+from email.message import EmailMessage
+from dotenv import load_dotenv
+
+# Load env variables
+load_dotenv()
+
+MAIL_HOST = os.getenv("MAIL_HOST")
+MAIL_PORT = int(os.getenv("MAIL_PORT"))
+MAIL_USERNAME = os.getenv("MAIL_USERNAME")
+MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+MAIL_FROM = os.getenv("MAIL_FROM")
+MAIL_TO = os.getenv("MAIL_TO")
+
+def send_email():
+    msg = EmailMessage()
+    msg["Subject"] = "Test Email from Python"
+    msg["From"] = MAIL_FROM
+    msg["To"] = MAIL_TO
+    msg.set_content("Ini email test dikirim dari aplikasi Python 🚀")
+
+    try:
+        with smtplib.SMTP(MAIL_HOST, MAIL_PORT) as server:
+            server.ehlo()
+            server.starttls()  # starttls.enable = true
+            server.ehlo()
+            server.login(MAIL_USERNAME, MAIL_PASSWORD)  # smtp.auth = true
+            server.send_message(msg)
+
+        print("✅ Email berhasil dikirim")
+
+    except Exception as e:
+        print("❌ Gagal kirim email")
+        print(e)
+
+if __name__ == "__main__":
+    send_email()
+```
+
+## Configuration
+
+Create a `.env` file in the same directory as your script with your SMTP details:
+
+```env:.env
+MAIL_HOST=smtp.example.com
+MAIL_PORT=587
+MAIL_USERNAME=your_username
+MAIL_PASSWORD=your_password
+MAIL_FROM=sender@example.com
+MAIL_TO=recipient@example.com
+```
+
+## How It Works
+
+1.  **Environment Variables**: The script uses `dotenv` to load sensitive information like passwords and hosts from the `.env` file, keeping them out of your code.
+2.  **Email Construction**: We use `EmailMessage` to construct a simple email with a subject, sender, recipient, and body content.
+3.  **SMTP Connection**:
+    - It connects to the `MAIL_HOST` on the specified `MAIL_PORT`.
+    - `server.starttls()` is called to upgrade the connection to a secure encrypted SSL/TLS connection.
+    - `server.login()` authenticates the user.
+    - `server.send_message()` sends the email.
+4.  **Error Handling**: The `try-except` block catches any exceptions (like authentication errors or connection timeouts) and prints a failure message.
+
+## Running the Test
+
+Run the script using Python:
+
+```bash
+python main.py
+```
+
+If everything is configured correctly, you should see:
+
+```
+✅ Email berhasil dikirim
+```
+
+And the recipient should receive the test email. If there's an error, the script will output:
+
+```
+❌ Gagal kirim email
+[Error details...]
+```
+
+## Conclusion
+
+This simple script has been a lifesaver for me when verifying SMTP credentials. It isolates the SMTP sending logic, allowing you to debug configuration issues without the noise of a larger application.
+
+Happy coding!

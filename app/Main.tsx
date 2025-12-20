@@ -35,14 +35,14 @@ export default function Home({ posts }) {
       {/* Introduce myself */}
       <div className="mt-8 dark:divide-gray-700 md:mt-8">
         <Greeting />
-        <div className="flex flex-col justify-between md:my-4 md:pb-8 xl:flex-row">
+        <div className="flex flex-col justify-between md:my-4 md:pb-8 xl:flex-row gap-8">
           <Avatar />
           <div className="my-auto flex flex-col text-lg leading-8 text-gray-600 dark:text-gray-400">
             <Heading />
             <TypedBios />
             <ShortDescription />
             <BlogLinks />
-            <SpotifyNowPlaying />
+            {/* <SpotifyNowPlaying /> */}
             <p className="flex">
               <span className="mr-2">Happy reading</span>
               <Twemoji emoji="clinking-beer-mugs" />

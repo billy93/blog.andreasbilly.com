@@ -7,9 +7,9 @@ export default function Footer() {
         <BuildWith />
 
         <div className="my-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
-          <div>{`Copyright © ${new Date().getFullYear()}`}</div>
+          <div>{`Copyright © 2026`}</div>
           <span>{` • `}</span>
-          <span>Karhdo's Blog - Coding Adventure</span>
+          <span>Billy's Blog - Problem Solvers</span>
         </div>
       </div>
     </footer>

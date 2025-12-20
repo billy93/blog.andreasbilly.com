@@ -172,3 +172,4 @@ export default makeSource({
     createSearchIndex(allBlogs);
   },
 });
+// Penjelasan: Perbaikan ini akan membersihkan karakter tersembunyi yang menyebabkan YAMLParseError, memungkinkan Contentlayer berjalan normal kembali.

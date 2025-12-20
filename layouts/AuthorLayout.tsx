@@ -53,12 +53,12 @@ export default function AuthorLayout({ children, content }: Props) {
 
           <div className="prose max-w-none pb-8 dark:prose-dark xl:col-span-2">
             <h2>
-              Hello, folks! <Twemoji className="mx-2" emoji="waving-hand" /> I'm Trong Khanh (aka Karhdo)
+              Hi, there! <Twemoji className="mx-2" emoji="waving-hand" /> I'm Andreas Billy
             </h2>
             <p>
               I have a passion for <strong>JavaScript/TypeScript</strong> and website development. I work mainly
-              software engineer at <strong>Spartan</strong>, deeply engaged in the <strong>Dealops</strong> project,
-              with <strong>JavaScript</strong>, <strong>TypeScript</strong>, <strong>NodeJS</strong>,{' '}
+              software engineer at <strong>ATI Business Group</strong>, deeply engaged in the <strong>Software</strong> project,
+              with <strong>Java</strong>, <strong>JavaScript</strong>, <strong>TypeScript</strong>, <strong>NodeJS</strong>,{' '}
               <strong>ReactJS</strong>, and <strong>Monorepo</strong>.
             </p>
             <h2>Why have this blog?</h2>
@@ -153,7 +153,7 @@ export default function AuthorLayout({ children, content }: Props) {
 
             <p>
               See my{' '}
-              <a target="_blank" href="https://github.com/Karhdo/karhdo.dev">
+              <a target="_blank" href="https://github.com/billy93">
                 repository
               </a>{' '}
               for this blog.

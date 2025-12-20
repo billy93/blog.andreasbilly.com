@@ -1,5 +1,5 @@
 {
-  "name": "karhdo.dev",
+  "name": "blog.andreasbilly.com",
   "version": "3.0.0",
   "engines": {
     "node": "24.x"
@@ -9,6 +9,7 @@
   "scripts": {
     "start": "next dev",
     "dev": "cross-env INIT_CWD=$PWD next dev",
+    "contentlayer": "contentlayer2 build",
     "build": "contentlayer2 build && next build",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
