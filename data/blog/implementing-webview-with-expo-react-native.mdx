@@ -1,0 +1,110 @@
+---
+title: 'Embedding a Website with Expo React Native WebView'
+date: '2025-12-25'
+lastmod: '2025-12-25'
+tags: ['react-native', 'expo', 'webview', 'mobile', 'android', 'ios']
+summary: >
+  Learn how to replace Expo's default tabs with a single home screen
+  that renders a WebView to an external site using react-native-webview.
+---
+
+## Introduction
+
+In this post, we’ll build a minimal React Native app with Expo that opens a website directly on launch.  
+Instead of the default tab layout, the app shows a single screen that loads your site in a WebView.  
+For this example, we’ll open: [https://blog.andreasbilly.com](https://blog.andreasbilly.com).
+
+Merry Christmas! a friend asked me to build a mobile app that automatically opens a website. I considered a few options, but using a WebView is the quickest and simplest approach, so I implemented a small React Native app that shows the site immediately on launch.
+
+The app’s source code is available at: [https://github.com/billy93/expo-webview](https://github.com/billy93/expo-webview).
+
+## Prerequisites
+
+Make sure you have Node.js and the Expo CLI. Then install the WebView dependency:
+
+```bash
+npm install react-native-webview
+```
+
+## The React Native Screen
+
+Here is the `app/index.tsx` screen. It uses `SafeAreaView` to respect device safe areas and `WebView` to render the site.
+
+```tsx:app/index.tsx showLineNumbers
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet } from 'react-native';
+import { WebView } from 'react-native-webview';
+
+export default function Index() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <WebView source={{ uri: 'https://blog.andreasbilly.com' }} style={styles.webview} />
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  webview: {
+    flex: 1,
+  },
+});
+```
+
+## Router Update
+
+We also replaced the default tab router with a simple stack that points to the `index` screen:
+
+```tsx:app/_layout.tsx showLineNumbers
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import 'react-native-reanimated';
+
+import { useColorScheme } from '@/hooks/use-color-scheme';
+
+export default function RootLayout() {
+  const colorScheme = useColorScheme();
+
+  return (
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+      </Stack>
+      <StatusBar style="auto" />
+    </ThemeProvider>
+  );
+}
+```
+
+## How It Works
+
+1. **Single-screen routing**: The app boots into `app/index.tsx`, removing the default tabs.
+2. **Safe area handling**: `SafeAreaView` avoids content overlapping with notches and system UI.
+3. **WebView rendering**: `react-native-webview` displays the external website in-app.
+4. **Web caveat**: Some sites set CSP/X-Frame-Options headers that block embedding on the web. Android/iOS usually work fine.
+
+## Running the App
+
+Start your development server and open the platform of your choice:
+
+```bash
+npm start
+# or
+npm run android
+npm run ios
+npm run web
+```
+
+If your default port is busy, you can pick another when prompted or start with a custom port:
+
+```bash
+npx expo start --web --port 8082
+```
+
+## Conclusion
+
+With a small change to the router and a simple `WebView` screen, you can turn an Expo starter into a focused app that opens your site on launch. This approach is ideal for wrapping existing web content into a mobile experience with minimal overhead.
